@@ -20,7 +20,8 @@ from selenium.common.exceptions import TimeoutException
 from constants.areaCodes import AREA_CODES
 
 from resume_faker import make_resume
-from pdf2image import convert_from_path
+from password_generator import PasswordGenerator
+
 
 from webdriver_manager.chrome import ChromeDriverManager
 os.environ['WDM_LOG_LEVEL'] = '0'
@@ -49,9 +50,9 @@ fake = Faker()
 printf = functools.partial(print, flush=True)
 
 #Option parsing
-parser = argparse.ArgumentParser(SCRIPT_DESCRIPTION,epilog=EPILOG)
-parser.add_argument('--debug',action='store_true',default=DEBUG_DISABLED,required=False,help=DEBUG_DESCRIPTION,dest='debug')
-args = parser.parse_args()
+# parser = argparse.ArgumentParser(SCRIPT_DESCRIPTION,epilog=EPILOG)
+# parser.add_argument('--debug',action='store_true',default=DEBUG_DISABLED,required=False,help=DEBUG_DESCRIPTION,dest='debug')
+# args = parser.parse_args()
 
 r = sr.Recognizer()
 
@@ -163,15 +164,15 @@ def solveCaptcha(driver):
     driver.switch_to.default_content()
 
 def start_driver(random_city):
-    options = Options()
-    if (args.debug == DEBUG_DISABLED):
-        options.add_argument(f"user-agent={USER_AGENT}")
-        options.add_argument('disable-blink-features=AutomationControlled')
-        options.headless = True
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        driver.set_window_size(1440, 900)
-    elif (args.debug == DEBUG_ENABLED):
-        driver = webdriver.Chrome(ChromeDriverManager().install())
+    #options = Options()
+    # if (args.debug == DEBUG_DISABLED):
+    #     options.add_argument(f"user-agent={USER_AGENT}")
+    #     options.add_argument('disable-blink-features=AutomationControlled')
+    #     options.headless = True
+    #     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    #     driver.set_window_size(1440, 900)
+    # elif (args.debug == DEBUG_ENABLED):
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(CITIES_TO_URLS[random_city])
     driver.implicitly_wait(10)
     WebDriverWait(driver, 10).until(expected_conditions.presence_of_element_located((By.XPATH, APPLY_NOW_BUTTON_1)))
@@ -186,7 +187,9 @@ def generate_account(driver, fake_identity):
 
     info = ''
     email = fake.free_email()
-    password = fake.password()
+    pwo = PasswordGenerator()
+    password = pwo.generate()
+    #password = fake.password()
 
     for key in XPATHS_1.keys():
         if key in ('email', 'email-retype'):
@@ -262,7 +265,7 @@ def application_part_2(driver, random_city, fake_identity):
     info = ''
     resume_filename = fake_identity['last_name']+'-Resume'
     make_resume(fake_identity['first_name']+' '+fake_identity['last_name'], fake_identity['email'], resume_filename+'.pdf')
-    images = convert_from_path(resume_filename+'.pdf')
+    #images = convert_from_path(resume_filename+'.pdf')
     #images[0].save(resume_filename+'.png', 'PNG')
 
     # Send Resume
