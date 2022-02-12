@@ -36,7 +36,6 @@ from constants.parser import *
 from constants.urls import *
 from constants.xPaths import *
 
-
 from datetime import date
 
 today = date.today()
@@ -48,11 +47,6 @@ fake = Faker()
 # Add printf: print with flush by default. This is for python 2 support.
 # https://stackoverflow.com/questions/230751/how-can-i-flush-the-output-of-the-print-function-unbuffer-python-output#:~:text=Changing%20the%20default%20in%20one%20module%20to%20flush%3DTrue
 printf = functools.partial(print, flush=True)
-
-#Option parsing
-# parser = argparse.ArgumentParser(SCRIPT_DESCRIPTION,epilog=EPILOG)
-# parser.add_argument('--debug',action='store_true',default=DEBUG_DISABLED,required=False,help=DEBUG_DESCRIPTION,dest='debug')
-# args = parser.parse_args()
 
 r = sr.Recognizer()
 
@@ -164,15 +158,9 @@ def solveCaptcha(driver):
     driver.switch_to.default_content()
 
 def start_driver(random_city):
-    #options = Options()
-    # if (args.debug == DEBUG_DISABLED):
-    #     options.add_argument(f"user-agent={USER_AGENT}")
-    #     options.add_argument('disable-blink-features=AutomationControlled')
-    #     options.headless = True
-    #     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-    #     driver.set_window_size(1440, 900)
-    # elif (args.debug == DEBUG_ENABLED):
+
     driver = webdriver.Chrome(ChromeDriverManager().install())
+
     driver.get(CITIES_TO_URLS[random_city])
     driver.implicitly_wait(10)
     WebDriverWait(driver, 10).until(expected_conditions.presence_of_element_located((By.XPATH, APPLY_NOW_BUTTON_1)))
@@ -265,11 +253,8 @@ def application_part_2(driver, random_city, fake_identity):
     info = ''
     resume_filename = fake_identity['last_name']+'-Resume'
     make_resume(fake_identity['first_name']+' '+fake_identity['last_name'], fake_identity['email'], resume_filename+'.pdf')
-    #images = convert_from_path(resume_filename+'.pdf')
-    #images[0].save(resume_filename+'.png', 'PNG')
 
     # Send Resume
-
     info = os.getcwd() + '/'+resume_filename+'.pdf'
     driver.find_element_by_xpath(UPLOAD_A_RESUME_BUTTON).send_keys(info)
 
@@ -380,7 +365,7 @@ def main():
             printf(f"FAILED TO START DRIVER: {e}")
             pass
 
-        time.sleep(2)
+        time.sleep(1)
 
         fake_first_name = fake.first_name()
         fake_last_name = fake.last_name()
