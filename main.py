@@ -5,7 +5,7 @@ import subprocess
 import random
 import sys
 import time
-import argparse
+import string
 from selenium.webdriver.chrome import options
 
 import speech_recognition as sr
@@ -35,6 +35,7 @@ from constants.location import *
 from constants.parser import *
 from constants.urls import *
 from constants.xPaths import *
+
 
 from datetime import date
 
@@ -89,6 +90,34 @@ def random_phone(format=None):
     elif format==4:
         return '('+area_code+') '+middle_three+'-'+last_four
 
+
+
+def gen_password():
+    let = list(string.ascii_letters)
+    num = list(string.digits)
+    characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
+
+    length = random.randint(6,30)
+
+    password = []
+    for i in range(length):
+        x = random.choice(characters)
+        if x not in password:
+            password.append(x)
+        else:
+            i = i-1
+
+    x = random.choice(let)
+    if not x in password:
+        x.capitalize()
+        password.append(x)
+
+    x = random.choice(num)
+    if x not in password:
+        password.append(x)
+
+    random.shuffle(password)
+    return "".join(password)
 
 def saveFile(content,filename):
     with open(filename, "wb") as handle:
@@ -176,7 +205,7 @@ def generate_account(driver, fake_identity):
     info = ''
     email = fake.free_email()
     pwo = PasswordGenerator()
-    password = pwo.generate()
+    password = gen_password()
     #password = fake.password()
 
     for key in XPATHS_1.keys():
