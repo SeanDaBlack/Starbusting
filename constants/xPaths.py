@@ -66,10 +66,22 @@ XPATH_EEO = {
     'EEO_1' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/fieldset[1]/span[2]/label/input',
     'EEO_2' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/fieldset[2]/span[3]/label/input',
     'EEO_3' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/fieldset[3]/span[3]/label/input',
-    'EEO_4' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/fieldset[4]/span[8]/label/input'
-
 
 }
+
+XPATH_RACES = [
+
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26260130812"]',
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26360130812"]',
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26460130812"]',
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26560130812"]',
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26660130812"]',
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26760130812"]',              
+    '//*[@id="et-ef-content-ftf-gp-j_id_id16pc9-page_0-diversityBlock-j_id_id11pc10-0-j_id_id14pc10-3-questionRadio_com.taleo.systemcomponent.question.entity.RegulationPossibleAnswer__26860130812"]',
+]
+
+
+
 
 XPATH_VOL = {
     "VOL_NAME" : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/div[2]/div/div[2]/div/div/input[1]',
