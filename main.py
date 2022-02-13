@@ -243,21 +243,20 @@ def generate_account(driver, fake_identity):
 def application_part_1(driver, random_city, fake_identity):
     for key in XPATHS_2.keys():
 
-        match key:
-            case 'first_name':
-                info = fake_identity['first_name']
-            case 'perfered_first_name':
-                info = fake_identity['first_name']
-            case 'last_name':
-                info = fake_identity['last_name']
-            case 'zip':
-                info = CITIES_TO_ZIP_CODES[random_city][0]
-            case 'pn':
-                info = random_phone(format=3)
-            case 'work_experience_employer':
-                info = fake.company()
-            case 'work_experinece_title':
-                info = fake.job()
+        if((key == 'first_name') or ('perfered_first_name')):
+            info = fake_identity['first_name']
+
+        elif(key == 'last_name'):
+            info = fake_identity['last_name']
+        elif(key == 'zip'):
+            info = CITIES_TO_ZIP_CODES[random_city][0]
+        elif(key == 'pn'):
+            info = random_phone(format=3)
+        elif(key == 'work_experience_employer'):
+            info = fake.company()
+        elif(key == 'work_experinece_title'):
+            info = fake.job()
+
 
         driver.find_element_by_xpath(XPATHS_2.get(key)).send_keys(info)
 
@@ -409,6 +408,7 @@ def random_email(name=None):
 
 
 def main():
+    
     while True:
         random_city = random.choice(list(CITIES_TO_URLS.keys()))
         try:
