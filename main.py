@@ -212,14 +212,13 @@ def generate_account(driver, fake_identity):
 
     info = ''
     email = fake.free_email()
-    pwo = PasswordGenerator()
     password = gen_password()
 
     for key in XPATHS_1.keys():
         if key in ('email', 'email-retype'):
             info = fake_identity['email']
         elif key in ('pass', 'pass-retype'):
-            info = password + "X!"
+            info = password
         elif key == 'username':
             info = fake_identity['first_name'] + \
                 fake_identity['last_name'] + str(random.randint(0, 10000))
@@ -245,42 +244,42 @@ def application_part_1(driver, random_city, fake_identity):
 
         if((key == 'first_name') or ('perfered_first_name')):
             info = fake_identity['first_name']
-
-        elif(key == 'last_name'):
+        if(key == 'last_name'):
             info = fake_identity['last_name']
-        elif(key == 'zip'):
+        if(key == 'zip'):
             info = CITIES_TO_ZIP_CODES[random_city][0]
-        elif(key == 'pn'):
+        if(key == 'pn'):
             info = random_phone(format=3)
-        elif(key == 'work_experience_employer'):
+        if(key == 'work_experience_employer'):
             info = fake.company()
-        elif(key == 'work_experinece_title'):
+        if(key == 'work_experinece_title'):
             info = fake.job()
 
-
+        print(key)
         driver.find_element_by_xpath(XPATHS_2.get(key)).send_keys(info)
 
-        # SELECT THE PLACE OF RESIDENCE
-        select = Select(driver.find_element_by_id(REGION_COUNTRY))
-        select.select_by_visible_text(COUNTRY)
-        select = Select(driver.find_element_by_id(REGION_STATE))
-        select.select_by_visible_text(STATE)
-        select = Select(driver.find_element_by_id(REGION_CITY))
-        select.select_by_visible_text(CITY)
+    # SELECT THE PLACE OF RESIDENCE
+    select = Select(driver.find_element_by_id(REGION_COUNTRY))
+    select.select_by_visible_text(COUNTRY)
+    select = Select(driver.find_element_by_id(REGION_STATE))
+    select.select_by_visible_text(STATE)
+    select = Select(driver.find_element_by_id(REGION_CITY))
+    select.select_by_visible_text(CITY)
 
-        # SELECT EMPLOY HISTORY
-        select = Select(driver.find_element_by_id(EMPLOY_HISTORY))
-        select.select_by_visible_text(NO)
+    # SELECT EMPLOY HISTORY
+    select = Select(driver.find_element_by_id(EMPLOY_HISTORY))
+    select.select_by_visible_text(NO)
 
-        # SELECT AVALIABLILITY
-        select = Select(driver.find_element_by_id(WILLING_WORK_HOURS))
-        select.select_by_value(str(random.randint(1, 5)))
-        select = Select(driver.find_element_by_id(PREF_HOURS))
-        select.select_by_value(str(random.randint(1, 5)))
+    # SELECT AVALIABLILITY
+    select = Select(driver.find_element_by_id(WILLING_WORK_HOURS))
+    select.select_by_value(str(random.randint(1, 5)))
+    select = Select(driver.find_element_by_id(PREF_HOURS))
+    select.select_by_value(str(random.randint(1, 5)))
 
-        driver.find_element_by_xpath(XPATH_AVAL['hours_holi']).click()
-        driver.find_element_by_xpath(XPATH_AVAL['hours_times']).click()
-        driver.find_element_by_xpath(XPATH_AVAL['current_job']).click()
+    driver.find_element_by_xpath(XPATH_AVAL['hours_holi']).click()
+    driver.find_element_by_xpath(XPATH_AVAL['hours_times']).click()
+    driver.find_element_by_xpath(XPATH_AVAL['current_job']).click()
+    time.sleep(100)
 
 
 def application_part_2(driver, random_city, fake_identity):
