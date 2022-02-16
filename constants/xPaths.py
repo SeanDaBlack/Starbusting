@@ -57,7 +57,6 @@ XPATH_QUALS = {
     'Quals_2' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[2]/span[1]/label/input',
     'Quals_3' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[3]/span[1]/label/input',
     'Quals_4' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[4]/span[1]/label/input',
-
 }
 
 # PAGE 4

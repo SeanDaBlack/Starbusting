@@ -42,7 +42,7 @@ today = date.today()
 # Adds /usr/local/bin to my path which is where my ffmpeg is stored
 os.environ["PATH"] += ":/usr/local/bin"
 
-fake = Faker()
+fake = Faker('en_US')
 
 # Add printf: print with flush by default. This is for python 2 support.
 # https://stackoverflow.com/questions/230751/how-can-i-flush-the-output-of-the-print-function-unbuffer-python-output#:~:text=Changing%20the%20default%20in%20one%20module%20to%20flush%3DTrue
@@ -97,7 +97,7 @@ def gen_password():
     num = list(string.digits)
     characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
 
-    length = random.randint(6, 30)
+    length = random.randint(10, 30)
 
     password = []
     for i in range(length):
@@ -117,6 +117,7 @@ def gen_password():
         password.append(x)
 
     random.shuffle(password)
+
     return "".join(password)
 
 
@@ -214,6 +215,7 @@ def generate_account(driver, fake_identity):
     email = fake.free_email()
     password = gen_password()
 
+    #print(password)
     for key in XPATHS_1.keys():
         if key in ('email', 'email-retype'):
             info = fake_identity['email']
@@ -255,7 +257,6 @@ def application_part_1(driver, random_city, fake_identity):
         if(key == 'work_experinece_title'):
             info = fake.job()
 
-        print(key)
         driver.find_element_by_xpath(XPATHS_2.get(key)).send_keys(info)
 
     # SELECT THE PLACE OF RESIDENCE
@@ -279,7 +280,7 @@ def application_part_1(driver, random_city, fake_identity):
     driver.find_element_by_xpath(XPATH_AVAL['hours_holi']).click()
     driver.find_element_by_xpath(XPATH_AVAL['hours_times']).click()
     driver.find_element_by_xpath(XPATH_AVAL['current_job']).click()
-    time.sleep(100)
+    time.sleep(1)
 
 
 def application_part_2(driver, random_city, fake_identity):
@@ -303,6 +304,7 @@ def application_part_2(driver, random_city, fake_identity):
 
 
 def application_part_3(driver, random_city, fake_identity):
+
     for key in XPATH_QUALS.keys():
 
         driver.find_element_by_xpath(XPATH_QUALS.get(key)).click()
