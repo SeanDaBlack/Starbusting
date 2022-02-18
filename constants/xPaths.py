@@ -57,6 +57,7 @@ XPATH_QUALS = {
     'Quals_2' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[2]/span[1]/label/input',
     'Quals_3' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[3]/span[1]/label/input',
     'Quals_4' : '/html/body/div[3]/form/span/span[2]/span[4]/table/tbody/tr/td/span[4]/span[3]/fieldset[4]/span[1]/label/input',
+
 }
 
 # PAGE 4
@@ -101,6 +102,8 @@ XPATH_QUEST = {
 
 }
 
+RESUME_UPLOAD_PARTNER = '//*[@id="editTemplateMultipart-editForm-content-ftf-gp-j_id_id16pc8-page_0-ResumeParsingBlock-UploadResumeBlock-resumeUploadRadio_2"]'
+ATTACH_RESUME_PARTNER = '//*[@id="editTemplateMultipart-editForm-content-ftf-gp-j_id_id16pc8-page_0-ResumeParsingBlock-UploadResumeBlock-ResumeUploadInputFile"]'
 
 
 APPLY_NOW_BUTTON_1 = '//*[@id="requisitionDescriptionInterface.UP_APPLY_ON_REQ.row1"]'
